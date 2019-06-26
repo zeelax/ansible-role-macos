@@ -23,6 +23,9 @@
 - import_tasks: system_misc.yml
   tags: [system, misc]
 
+- import_tasks: system_pm.yml
+  tags: [system, pm]
+
 - import_tasks: system_screensaver.yml
   tags: [system, screensaver]
 

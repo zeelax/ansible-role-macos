@@ -55,6 +55,12 @@ system_defaults:
 
     enable_menubar_transparency: yes
 
+  pm:
+    display_sleep: 0
+    sleep: 0
+    disk_sleep: 0
+    auto_restart: 0
+
   screensaver:
 
     # Screensaver activation delay in seconds

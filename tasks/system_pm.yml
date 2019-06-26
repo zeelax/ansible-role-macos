@@ -1,0 +1,41 @@
+---
+
+- name: "Power management - Read display sleep timer"
+  shell: "pmset -g | grep '^ displaysleep' | awk '{print $2}'"
+  register: display_sleep_timer
+  changed_when: false
+
+- name: "Power management: Set display sleep timer"
+  shell: "pmset displaysleep {{ system.pm.display_sleep }}"
+  become: yes
+  when: (display_sleep_timer.stdout | int() ) != system.pm.display_sleep
+
+- name: "Power management - Read sleep timer"
+  shell: "pmset -g | grep '^ sleep' | awk '{print $2}'"
+  register: sleep_timer
+  changed_when: false
+
+- name: "Power management - Set sleep timer"
+  shell: "pmset sleep {{ system.pm.displaysleep }}"
+  become: yes
+  when: (sleep_timer.stdout | int() ) != system.pm.sleep
+
+- name: "Power management - Read disk spindown timer"
+  shell: "pmset -g | grep '^ disksleep' | awk '{print $2}'"
+  register: disk_sleep_timer
+  changed_when: false
+
+- name: "Power management - Set disk spindown timer"
+  shell: "pmset disksleep {{ system.pm.disk_sleep }}"
+  become: yes
+  when: (disk_sleep_timer.stdout | int() ) != system.pm.disk_sleep
+
+- name: "Power management - Read disk spindown timer"
+  shell: "pmset -g | grep '^ disksleep' | awk '{print $2}'"
+  register: autorestart
+  changed_when: false
+
+- name: "Power Management - Set restart machine on power reset"
+  shell: "pmset autorestart {{ system.pm.auto_restart }}"
+  become: yes
+  when: (autorestart.stdout | int() ) != system.pm.auto_restart
