@@ -56,9 +56,9 @@ system_defaults:
     enable_menubar_transparency: yes
 
   pm:
-    display_sleep: 0
-    sleep: 0
-    disk_sleep: 0
+    display_sleep: 10
+    sleep: 10
+    disk_sleep: 10
     auto_restart: 0
 
   screensaver:

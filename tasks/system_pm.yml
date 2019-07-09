@@ -16,7 +16,7 @@
   changed_when: false
 
 - name: "Power management - Set sleep timer"
-  shell: "pmset sleep {{ system.pm.displaysleep }}"
+  shell: "pmset sleep {{ system.pm.sleep }}"
   become: yes
   when: (sleep_timer.stdout | int() ) != system.pm.sleep
 
@@ -30,8 +30,8 @@
   become: yes
   when: (disk_sleep_timer.stdout | int() ) != system.pm.disk_sleep
 
-- name: "Power management - Read disk spindown timer"
-  shell: "pmset -g | grep '^ disksleep' | awk '{print $2}'"
+- name: "Power management - Read restart machine on power reset value"
+  shell: "pmset -g | grep '^ autorestart' | awk '{print $2}'"
   register: autorestart
   changed_when: false
 
